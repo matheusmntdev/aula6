@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conceitos de Criação de Tabelas em SQL</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        code {
+            background-color: #eaeaea;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: "Courier New", Courier, monospace;
+        }
+        pre {
+            background-color: #eaeaea;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Criação de Tabelas com <code>CREATE TABLE</code></h1>
+        <p>
+            O comando <code>CREATE TABLE</code> é utilizado em SQL para criar uma nova tabela em um banco de dados. Uma tabela é uma estrutura que armazena dados em linhas e colunas. Cada coluna tem um tipo de dado específico e pode ter restrições que definem regras para os dados que podem ser armazenados.
+        </p>
+
+        <h2>Sintaxe Básica</h2>
+        <pre><code>CREATE TABLE nome_da_tabela (
+    coluna1 tipo_de_dado restrições,
+    coluna2 tipo_de_dado restrições,
+    ...
+);</code></pre>
+
+        <h2>Conceitos de Colunas, Tipos de Dados e Restrições</h2>
+        <h3>Colunas</h3>
+        <p>
+            As colunas são os atributos ou campos de uma tabela. Cada coluna tem um nome e um tipo de dado que define o tipo de informação que pode ser armazenada.
+        </p>
+
+        <h3>Tipos de Dados</h3>
+        <p>
+            Os tipos de dados definem o tipo de valor que pode ser armazenado em uma coluna. Alguns tipos de dados comuns incluem:
+        </p>
+        <ul>
+            <li><code>INT</code>: Números inteiros.</li>
+            <li><code>VARCHAR(n)</code>: Strings de caracteres com comprimento variável, onde <code>n</code> é o número máximo de caracteres.</li>
+            <li><code>CHAR(n)</code>: Strings de caracteres com comprimento fixo, onde <code>n</code> é o número exato de caracteres.</li>
+            <li><code>DATE</code>: Armazena datas no formato <code>YYYY-MM-DD</code>.</li>
+            <li><code>DECIMAL(p, s)</code>: Números decimais, onde <code>p</code> é a precisão total e <code>s</code> é o número de dígitos após o ponto decimal.</li>
+            <li><code>BOOLEAN</code>: Armazena valores verdadeiros ou falsos.</li>
+        </ul>
+
+        <h3>Restrições</h3>
+        <p>
+            As restrições são regras aplicadas às colunas para garantir a integridade dos dados. Algumas restrições comuns incluem:
+        </p>
+        <ul>
+            <li><code>NOT NULL</code>: A coluna não pode ter valores nulos.</li>
+            <li><code>UNIQUE</code>: Todos os valores na coluna devem ser únicos.</li>
+            <li><code>PRIMARY KEY</code>: Define a coluna como chave primária (única e não nula).</li>
+            <li><code>FOREIGN KEY</code>: Define a coluna como chave estrangeira, referenciando uma chave primária em outra tabela.</li>
+            <li><code>CHECK</code>: Define uma condição que deve ser satisfeita para os valores na coluna.</li>
+            <li><code>DEFAULT</code>: Define um valor padrão para a coluna se nenhum valor for especificado.</li>
+        </ul>
+
+        <h2>Exemplo de Criação de Tabela</h2>
+        <p>
+            Vamos criar uma tabela chamada <code>clientes</code> com algumas colunas e restrições:
+        </p>
+        <pre><code>CREATE TABLE clientes (
+    id INT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE,
+    data_nascimento DATE,
+    salario DECIMAL(10, 2) CHECK (salario >= 0),
+    ativo BOOLEAN DEFAULT TRUE
+);</code></pre>
+        <p>
+            Neste exemplo:
+        </p>
+        <ul>
+            <li><code>id</code> é a chave primária, o que significa que cada valor nesta coluna deve ser único e não nulo.</li>
+            <li><code>nome</code> é uma coluna que não pode ser nula e pode armazenar até 100 caracteres.</li>
+            <li><code>email</code> é uma coluna que deve conter valores únicos.</li>
+            <li><code>data_nascimento</code> armazena datas.</li>
+            <li><code>salario</code> é um número decimal que deve ser maior ou igual a zero.</li>
+            <li><code>ativo</code> é um valor booleano que, por padrão, é <code>TRUE</code>.</li>
+        </ul>
+
+        <h2>Conceitos Iniciais de Chaves Primárias</h2>
+        <p>
+            Uma <strong>chave primária</strong> é uma coluna (ou conjunto de colunas) que identifica unicamente cada linha em uma tabela. As chaves primárias têm as seguintes características:
+        </p>
+        <ol>
+            <li><strong>Unicidade</strong>: Cada valor na coluna (ou conjunto de colunas) deve ser único.</li>
+            <li><strong>Não Nulidade</strong>: A coluna não pode conter valores nulos.</li>
+        </ol>
+
+        <h3>Exemplo de Chave Primária</h3>
+        <p>
+            No exemplo anterior, a coluna <code>id</code> é a chave primária da tabela <code>clientes</code>. Isso significa que cada cliente terá um <code>id</code> único, e nenhum outro cliente poderá ter o mesmo <code>id</code>.
+        </p>
+        <pre><code>CREATE TABLE pedidos (
+    pedido_id INT PRIMARY KEY,
+    cliente_id INT,
+    data_pedido DATE,
+    valor_total DECIMAL(10, 2),
+    FOREIGN KEY (cliente_id) REFERENCES clientes(id)
+);</code></pre>
+        <p>
+            Neste exemplo:
+        </p>
+        <ul>
+            <li><code>pedido_id</code> é a chave primária da tabela <code>pedidos</code>.</li>
+            <li><code>cliente_id</code> é uma chave estrangeira que referencia a coluna <code>id</code> na tabela <code>clientes</code>. Isso cria uma relação entre as tabelas <code>clientes</code> e <code>pedidos</code>.</li>
+        </ul>
+
+        <h2>Resumo</h2>
+        <ul>
+            <li><code>CREATE TABLE</code> é usado para criar tabelas.</li>
+            <li><strong>Colunas</strong> são os atributos da tabela, cada uma com um tipo de dado específico.</li>
+            <li><strong>Restrições</strong> como <code>NOT NULL</code>, <code>UNIQUE</code>, <code>PRIMARY KEY</code>, <code>FOREIGN KEY</code>, <code>CHECK</code>, e <code>DEFAULT</code> ajudam a garantir a integridade dos dados.</li>
+            <li><strong>Chave Primária</strong> é uma coluna (ou conjunto de colunas) que identifica unicamente cada linha em uma tabela.</li>
+        </ul>
+    </div>
+</body>
+</html>

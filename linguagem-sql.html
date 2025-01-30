@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Introdução à Linguagem SQL</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 20px;
+      padding: 0;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    h1,
+    h2,
+    h3 {
+      color: #2c3e50;
+    }
+
+    code {
+      background-color: #eaeaea;
+      padding: 2px 5px;
+      border-radius: 3px;
+      font-family: "Courier New", Courier, monospace;
+    }
+
+    pre {
+      background-color: #eaeaea;
+      padding: 10px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    ul {
+      margin: 10px 0;
+      padding-left: 20px;
+    }
+
+    ul li {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Introdução à Linguagem SQL</h1>
+
+    <h2>O que é SQL?</h2>
+    <p>
+      <strong>SQL</strong> (Structured Query Language) é uma linguagem de programação projetada para gerenciar e
+      manipular bancos de dados relacionais. Ela é usada para realizar operações como consultar, inserir, atualizar e
+      excluir dados, além de criar e modificar a estrutura de bancos de dados. SQL é uma linguagem padrão amplamente
+      adotada em sistemas de gerenciamento de bancos de dados (SGBDs), como MySQL, PostgreSQL, Oracle, SQL Server e
+      SQLite.
+    </p>
+
+    <h2>Para que Serve o SQL?</h2>
+    <p>
+      O SQL serve para:
+    </p>
+    <ul>
+      <li><strong>Consultar Dados</strong>:
+        Permite extrair informações específicas de um banco de dados usando comandos como <code>SELECT</code>.
+      </li>
+      <li><strong>Inserir Dados</strong>:
+        Adiciona novos registros a uma tabela usando o comando <code>INSERT</code>.
+      </li>
+      <li><strong>Atualizar Dados</strong>:
+        Modifica registros existentes em uma tabela com o comando <code>UPDATE</code>.
+      </li>
+      <li><strong>Excluir Dados</strong>:
+        Remove registros de uma tabela usando o comando <code>DELETE</code>.
+      </li>
+      <li><strong>Criar e Modificar Estruturas de Banco de Dados</strong>:
+        Permite criar tabelas, índices, views e outros objetos do banco de dados com comandos como <code>CREATE</code>,
+        <code>ALTER</code> e <code>DROP</code>.
+      </li>
+      <li><strong>Gerenciar Permissões e Segurança</strong>:
+        Controla o acesso aos dados com comandos como <code>GRANT</code> e <code>REVOKE</code>.
+      </li>
+    </ul>
+
+    <h2>Componentes Principais do SQL</h2>
+    <ul>
+      <li><strong>DDL (Data Definition Language)</strong>:
+        Comandos usados para definir e modificar a estrutura do banco de dados.
+        Exemplos: <code>CREATE</code>, <code>ALTER</code>, <code>DROP</code>.
+      </li>
+      <li><strong>DML (Data Manipulation Language)</strong>:
+        Comandos usados para manipular os dados armazenados no banco de dados.
+        Exemplos: <code>SELECT</code>, <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>.
+      </li>
+      <li><strong>DCL (Data Control Language)</strong>:
+        Comandos usados para controlar o acesso aos dados.
+        Exemplos: <code>GRANT</code>, <code>REVOKE</code>.
+      </li>
+      <li><strong>TCL (Transaction Control Language)</strong>:
+        Comandos usados para gerenciar transações no banco de dados.
+        Exemplos: <code>COMMIT</code>, <code>ROLLBACK</code>, <code>SAVEPOINT</code>.
+      </li>
+    </ul>
+
+    <h2>Exemplos de Comandos SQL</h2>
+    <h3>Criar uma Tabela</h3>
+    <pre><code>CREATE TABLE clientes (
+    id INT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE,
+    data_nascimento DATE
+);</code></pre>
+
+    <h3>Inserir Dados</h3>
+    <pre><code>INSERT INTO clientes (id, nome, email, data_nascimento)
+VALUES (1, 'João Silva', 'joao.silva@example.com', '1990-05-15');</code></pre>
+
+    <h3>Consultar Dados</h3>
+    <pre><code>SELECT nome, email FROM clientes WHERE data_nascimento > '1985-01-01';</code></pre>
+
+    <h3>Atualizar Dados</h3>
+    <pre><code>UPDATE clientes SET email = 'joao.novo@example.com' WHERE id = 1;</code></pre>
+
+    <h3>Excluir Dados</h3>
+    <pre><code>DELETE FROM clientes WHERE id = 1;</code></pre>
+
+    <h3>Criar um Índice</h3>
+    <pre><code>CREATE INDEX idx_nome ON clientes (nome);</code></pre>
+
+    <h3>Conceder Permissões</h3>
+    <pre><code>GRANT SELECT ON clientes TO 'usuario';</code></pre>
+
+    <h2>Vantagens do SQL</h2>
+    <ul>
+      <li><strong>Padronização</strong>:
+        SQL é uma linguagem padrão, o que significa que os conceitos e comandos básicos são consistentes entre
+        diferentes SGBDs.
+      </li>
+      <li><strong>Facilidade de Uso</strong>:
+        A sintaxe do SQL é relativamente simples e intuitiva, facilitando a aprendizagem e o uso.
+      </li>
+      <li><strong>Eficiência</strong>:
+        SQL é otimizado para operações em grandes volumes de dados, permitindo consultas rápidas e eficientes.
+      </li>
+      <li><strong>Flexibilidade</strong>:
+        Pode ser usado para uma variedade de tarefas, desde consultas simples até operações complexas de gerenciamento
+        de banco de dados.
+      </li>
+      <li><strong>Integração</strong>:
+        SQL é compatível com a maioria das linguagens de programação e frameworks, facilitando a integração com
+        aplicações.
+      </li>
+    </ul>
+
+    <h2>Conclusão</h2>
+    <p>
+      SQL é uma linguagem poderosa e essencial para qualquer pessoa que trabalhe com bancos de dados. Seja você um
+      desenvolvedor, analista de dados ou administrador de banco de dados, entender SQL é fundamental para manipular e
+      gerenciar dados de forma eficiente. Com sua sintaxe clara e ampla adoção, SQL continua sendo uma das habilidades
+      mais valiosas no mundo da tecnologia da informação.
+    </p>
+  </div>
+</body>
+
+</html>
