@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guia de Comandos MySQL via CLI</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 20px;
+      padding: 0;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    h1,
+    h2,
+    h3 {
+      color: #2c3e50;
+    }
+
+    code {
+      background-color: #eaeaea;
+      padding: 2px 5px;
+      border-radius: 3px;
+      font-family: "Courier New", Courier, monospace;
+    }
+
+    pre {
+      background-color: #eaeaea;
+      padding: 10px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    ul {
+      margin: 10px 0;
+      padding-left: 20px;
+    }
+
+    ul li {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Guia de Comandos MySQL via CLI</h1>
+
+    <h2>1. Acessando o MySQL via CLI</h2>
+    <p>
+      Para acessar o MySQL via terminal, use o comando:
+    </p>
+    <pre><code>mysql -u [usuário] -p</code></pre>
+    <p>
+      Substitua <code>[usuário]</code> pelo nome do usuário do MySQL. O comando solicitará a senha do usuário.
+    </p>
+    <p>
+      Exemplo:
+    </p>
+    <pre><code>mysql -u root -p</code></pre>
+
+    <h2>2. Comandos Básicos do MySQL</h2>
+    <h3>a) Mostrar Bancos de Dados Existentes</h3>
+    <pre><code>SHOW DATABASES;</code></pre>
+
+    <h3>b) Criar um Novo Banco de Dados</h3>
+    <pre><code>CREATE DATABASE nome_do_banco;</code></pre>
+    <p>
+      Exemplo:
+    </p>
+    <pre><code>CREATE DATABASE meubanco;</code></pre>
+
+    <h3>c) Selecionar um Banco de Dados</h3>
+    <pre><code>USE nome_do_banco;</code></pre>
+    <p>
+      Exemplo:
+    </p>
+    <pre><code>USE meubanco;</code></pre>
+
+    <h3>d) Mostrar Tabelas do Banco de Dados</h3>
+    <pre><code>SHOW TABLES;</code></pre>
+
+    <h3>e) Descrever uma Tabela</h3>
+    <pre><code>DESCRIBE nome_da_tabela;</code></pre>
+    <p>
+      Exemplo:
+    </p>
+    <pre><code>DESCRIBE clientes;</code></pre>
+
+    <h2>3. Comandos para Manipulação de Dados</h2>
+    <h3>a) Criar uma Tabela</h3>
+    <pre><code>CREATE TABLE nome_da_tabela (
+    coluna1 tipo_de_dado restrições,
+    coluna2 tipo_de_dado restrições,
+    ...
+);</code></pre>
+    <p>
+      Exemplo:
+    </p>
+    <pre><code>CREATE TABLE clientes (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE,
+    data_nascimento DATE
+);</code></pre>
+
+    <h3>b) Inserir Dados em uma Tabela</h3>
+    <pre><code>INSERT INTO nome_da_tabela (coluna1, coluna2, ...)
+VALUES (valor1, valor2, ...);</code></pre>
+    <p>
+      Exemplo:
+    </p>
+    <pre><code>INSERT INTO clientes (nome, email, data_nascimento)
+VALUES ('João Silva', 'joao.silva@example.com', '1990-05-15');</code></pre>
+
+    <h3>c) Consultar Dados</h3>
+    <pre><code>SELECT coluna1, coluna2, ...
+FROM nome_da_tabela
+WHERE condição;</code></pre>
+    <p>
+      Exemplo:
+    </p>
+    <pre><code>SELECT nome, email FROM clientes WHERE data_nascimento > '1985-01-01';</code></pre>
+
+    <h3>d) Atualizar Dados</h3>
+    <pre><code>UPDATE nome_da_tabela
+SET coluna1 = valor1, coluna2 = valor2, ...
+WHERE condição;</code></pre>
+    <p>
+      Exemplo:
+    </p>
+    <pre><code>UPDATE clientes SET email = 'joao.novo@example.com' WHERE id = 1;</code></pre>
+
+    <h3>e) Excluir Dados</h3>
+    <pre><code>DELETE FROM nome_da_tabela
+WHERE condição;</code></pre>
+    <p>
+      Exemplo:
+    </p>
+    <pre><code>DELETE FROM clientes WHERE id = 1;</code></pre>
+
+    <h2>4. Comandos para Gerenciamento de Estrutura</h2>
+    <h3>a) Adicionar uma Coluna a uma Tabela</h3>
+    <pre><code>ALTER TABLE nome_da_tabela
+ADD COLUMN nome_da_coluna tipo_de_dado restrições;</code></pre>
+    <p>
+      Exemplo:
+    </p>
+    <pre><code>ALTER TABLE clientes
+ADD COLUMN telefone VARCHAR(15);</code></pre>
+
+    <h3>b) Modificar uma Coluna</h3>
+    <pre><code>ALTER TABLE nome_da_tabela
+MODIFY COLUMN nome_da_coluna novo_tipo_de_dado;</code></pre>
+    <p>
+      Exemplo:
+    </p>
+    <pre><code>ALTER TABLE clientes
+MODIFY COLUMN telefone VARCHAR(20);</code></pre>
+
+    <h3>c) Excluir uma Coluna</h3>
+    <pre><code>ALTER TABLE nome_da_tabela
+DROP COLUMN nome_da_coluna;</code></pre>
+    <p>
+      Exemplo:
+    </p>
+    <pre><code>ALTER TABLE clientes
+DROP COLUMN telefone;</code></pre>
+
+    <h3>d) Excluir uma Tabela</h3>
+    <pre><code>DROP TABLE nome_da_tabela;</code></pre>
+    <p>
+      Exemplo:
+    </p>
+    <pre><code>DROP TABLE clientes;</code></pre>
+
+    <h3>e) Excluir um Banco de Dados</h3>
+    <pre><code>DROP DATABASE nome_do_banco;</code></pre>
+    <p>
+      Exemplo:
+    </p>
+    <pre><code>DROP DATABASE meubanco;</code></pre>
+
+    <h2>5. Comandos para Gerenciamento de Usuários e Permissões</h2>
+    <h3>a) Criar um Novo Usuário</h3>
+    <pre><code>CREATE USER 'nome_do_usuario'@'localhost' IDENTIFIED BY 'senha';</code></pre>
+    <p>
+      Exemplo:
+    </p>
+    <pre><code>CREATE USER 'novousuario'@'localhost' IDENTIFIED BY 'minhasenha';</code></pre>
+
+    <h3>b) Conceder Permissões a um Usuário</h3>
+    <pre><code>GRANT tipo_de_permissão ON nome_do_banco.nome_da_tabela TO 'nome_do_usuario'@'localhost';</code></pre>
+    <p>
+      Exemplo:
+    </p>
+    <pre><code>GRANT SELECT, INSERT, UPDATE ON meubanco.* TO 'novousuario'@'localhost';</code></pre>
+
+    <h3>c) Revogar Permissões</h3>
+    <pre><code>REVOKE tipo_de_permissão ON nome_do_banco.nome_da_tabela FROM 'nome_do_usuario'@'localhost';</code></pre>
+    <p>
+      Exemplo:
+    </p>
+    <pre><code>REVOKE INSERT ON meubanco.* FROM 'novousuario'@'localhost';</code></pre>
+
+    <h3>d) Excluir um Usuário</h3>
+    <pre><code>DROP USER 'nome_do_usuario'@'localhost';</code></pre>
+    <p>
+      Exemplo:
+    </p>
+    <pre><code>DROP USER 'novousuario'@'localhost';</code></pre>
+
+    <h2>6. Comandos para Sair e Outros Utilitários</h2>
+    <h3>a) Sair do MySQL</h3>
+    <pre><code>EXIT;</code></pre>
+    <p>
+      ou
+    </p>
+    <pre><code>QUIT;</code></pre>
+
+    <h3>b) Mostrar Versão do MySQL</h3>
+    <pre><code>SELECT VERSION();</code></pre>
+
+    <h3>c) Mostrar Status do Servidor</h3>
+    <pre><code>STATUS;</code></pre>
+
+    <h2>7. Importar e Exportar Bancos de Dados</h2>
+    <h3>a) Exportar um Banco de Dados</h3>
+    <pre><code>mysqldump -u [usuário] -p nome_do_banco > arquivo.sql</code></pre>
+    <p>
+      Exemplo:
+    </p>
+    <pre><code>mysqldump -u root -p meubanco > backup.sql</code></pre>
+
+    <h3>b) Importar um Banco de Dados</h3>
+    <pre><code>mysql -u [usuário] -p nome_do_banco < arquivo.sql</code></pre>
+    <p>
+      Exemplo:
+    </p>
+    <pre><code>mysql -u root -p meubanco < backup.sql</code></pre>
+
+    <h2>Conclusão</h2>
+    <p>
+      Este guia cobre os comandos essenciais para trabalhar com o MySQL via CLI. Com esses comandos, você pode gerenciar
+      bancos de dados, tabelas, usuários e permissões, além de realizar operações de manipulação de dados. Pratique
+      esses comandos para se familiarizar com o MySQL e aumentar sua produtividade no gerenciamento de bancos de dados.
+    </p>
+  </div>
+</body>
+
+</html>
