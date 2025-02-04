@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tipos de Dados no MySQL</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; line-height: 1.6; }
+        h1, h2 { color: #2c3e50; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #3498db; color: white; }
+        .category { background-color: #ecf0f1; padding: 5px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Tipos de Dados no MySQL</h1>
+    
+    <h2>1. Tipos Numéricos</h2>
+    <table>
+        <tr><th>Tipo</th><th>Tamanho</th><th>Faixa de Valores (com UNSIGNED)</th></tr>
+        <tr><td>TINYINT</td><td>1 byte</td><td>-128 a 127 (0 a 255)</td></tr>
+        <tr><td>SMALLINT</td><td>2 bytes</td><td>-32.768 a 32.767 (0 a 65.535)</td></tr>
+        <tr><td>MEDIUMINT</td><td>3 bytes</td><td>-8.388.608 a 8.388.607 (0 a 16.777.215)</td></tr>
+        <tr><td>INT / INTEGER</td><td>4 bytes</td><td>-2.147.483.648 a 2.147.483.647 (0 a 4.294.967.295)</td></tr>
+        <tr><td>BIGINT</td><td>8 bytes</td><td>-9.223.372.036.854.775.808 a 9.223.372.036.854.775.807</td></tr>
+    </table>
+    
+    <h2>2. Tipos de Texto (Strings)</h2>
+    <table>
+        <tr><th>Tipo</th><th>Tamanho Máximo</th><th>Descrição</th></tr>
+        <tr><td>CHAR(n)</td><td>255 caracteres</td><td>Tamanho fixo</td></tr>
+        <tr><td>VARCHAR(n)</td><td>65.535 caracteres</td><td>Tamanho variável</td></tr>
+        <tr><td>TEXT</td><td>65.535 caracteres</td><td>Texto longo</td></tr>
+        <tr><td>MEDIUMTEXT</td><td>16.777.215 caracteres</td><td>Texto intermediário</td></tr>
+        <tr><td>LONGTEXT</td><td>4.294.967.295 caracteres</td><td>Texto extremamente longo</td></tr>
+    </table>
+    
+    <h2>3. Tipos de Data e Hora</h2>
+    <table>
+        <tr><th>Tipo</th><th>Formato</th><th>Descrição</th></tr>
+        <tr><td>DATE</td><td>YYYY-MM-DD</td><td>Apenas data</td></tr>
+        <tr><td>DATETIME</td><td>YYYY-MM-DD HH:MI:SS</td><td>Data e hora combinadas</td></tr>
+        <tr><td>TIMESTAMP</td><td>YYYY-MM-DD HH:MI:SS</td><td>Semelhante a DATETIME</td></tr>
+        <tr><td>TIME</td><td>HH:MI:SS</td><td>Apenas hora</td></tr>
+        <tr><td>YEAR</td><td>YYYY</td><td>Apenas anos</td></tr>
+    </table>
+    
+    <h2>4. JSON e Dados Geográficos</h2>
+    <table>
+        <tr><th>Tipo</th><th>Descrição</th></tr>
+        <tr><td>JSON</td><td>Armazena dados em JSON</td></tr>
+        <tr><td>GEOMETRY</td><td>Representa qualquer dado espacial</td></tr>
+        <tr><td>POINT</td><td>Um único ponto (latitude e longitude)</td></tr>
+        <tr><td>LINESTRING</td><td>Linha composta por múltiplos pontos</td></tr>
+        <tr><td>POLYGON</td><td>Área fechada definida por múltiplos pontos</td></tr>
+    </table>
+    
+    <h2>5. Tipos Binários</h2>
+    <table>
+        <tr><th>Tipo</th><th>Tamanho Máximo</th><th>Descrição</th></tr>
+        <tr><td>BLOB</td><td>65.535 bytes</td><td>Dados binários grandes</td></tr>
+        <tr><td>MEDIUMBLOB</td><td>16.777.215 bytes</td><td>Versão intermediária</td></tr>
+        <tr><td>LONGBLOB</td><td>4.294.967.295 bytes</td><td>Versão longa</td></tr>
+    </table>
+    
+    <h2>Conclusão</h2>
+    <p>Escolha o tipo de dado adequado de acordo com suas necessidades:</p>
+    <ul>
+        <li><b>Se precisa de números:</b> Use INT para inteiros, DECIMAL para valores exatos.</li>
+        <li><b>Se precisa de textos:</b> VARCHAR para textos pequenos, TEXT para longos.</li>
+        <li><b>Se precisa de datas:</b> TIMESTAMP para marcações automáticas.</li>
+        <li><b>Se precisa de JSON ou dados geográficos:</b> JSON e GEOMETRY são boas opções.</li>
+    </ul>
+</body>
+</html>

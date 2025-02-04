@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Restrições (Constraints) no MySQL</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      line-height: 1.6;
+    }
+
+    h1,
+    h2 {
+      color: #2c3e50;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    th,
+    td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #3498db;
+      color: white;
+    }
+
+    .code {
+      background-color: #f4f4f4;
+      padding: 10px;
+      border-radius: 5px;
+      font-family: monospace;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Restrições (Constraints) no MySQL</h1>
+
+  <h2>1. Restrições de Integridade</h2>
+  <h3>🔹 PRIMARY KEY</h3>
+  <p>Define uma chave primária única para a tabela. Não permite valores duplicados ou NULL.</p>
+  <div class="code">
+    CREATE TABLE clientes (
+    id INT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL
+    );
+  </div>
+
+  <h3>🔹 UNIQUE</h3>
+  <p>Garante que todos os valores em uma coluna sejam únicos.</p>
+  <div class="code">
+    CREATE TABLE usuarios (
+    id INT PRIMARY KEY,
+    email VARCHAR(255) UNIQUE
+    );
+  </div>
+
+  <h2>2. Restrições de Relacionamento</h2>
+  <h3>🔹 FOREIGN KEY</h3>
+  <p>Define uma chave estrangeira para referenciar outra tabela.</p>
+  <div class="code">
+    CREATE TABLE pedidos (
+    id INT PRIMARY KEY,
+    cliente_id INT,
+    FOREIGN KEY (cliente_id) REFERENCES clientes(id) ON DELETE CASCADE
+    );
+  </div>
+
+  <h2>3. Restrições de Validação</h2>
+  <h3>🔹 NOT NULL</h3>
+  <p>Garante que a coluna não pode armazenar valores NULL.</p>
+  <div class="code">
+    CREATE TABLE produtos (
+    id INT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL
+    );
+  </div>
+
+  <h3>🔹 CHECK</h3>
+  <p>Define uma condição que os valores devem atender (suportado no MySQL 8.0.16+).</p>
+  <div class="code">
+    CREATE TABLE funcionarios (
+    id INT PRIMARY KEY,
+    idade INT CHECK (idade >= 18)
+    );
+  </div>
+
+  <h2>4. Restrições Padrão</h2>
+  <h3>🔹 DEFAULT</h3>
+  <p>Define um valor padrão para uma coluna.</p>
+  <div class="code">
+    CREATE TABLE clientes (
+    id INT PRIMARY KEY,
+    status VARCHAR(20) DEFAULT 'ativo'
+    );
+  </div>
+
+  <h2>5. Resumo das Restrições</h2>
+  <table>
+    <tr>
+      <th>Restrição</th>
+      <th>Descrição</th>
+    </tr>
+    <tr>
+      <td>PRIMARY KEY</td>
+      <td>Identifica um registro de forma única.</td>
+    </tr>
+    <tr>
+      <td>UNIQUE</td>
+      <td>Garante que os valores da coluna sejam únicos.</td>
+    </tr>
+    <tr>
+      <td>FOREIGN KEY</td>
+      <td>Define relacionamentos entre tabelas.</td>
+    </tr>
+    <tr>
+      <td>NOT NULL</td>
+      <td>Impede valores NULL.</td>
+    </tr>
+    <tr>
+      <td>CHECK</td>
+      <td>Restringe valores com uma condição.</td>
+    </tr>
+    <tr>
+      <td>DEFAULT</td>
+      <td>Define um valor padrão para uma coluna.</td>
+    </tr>
+  </table>
+</body>
+
+</html>

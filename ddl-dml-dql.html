@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DDL, DML e DQL no MySQL</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      line-height: 1.6;
+    }
+
+    h1,
+    h2,
+    h3 {
+      color: #2c3e50;
+    }
+
+    pre {
+      background-color: #f4f4f4;
+      padding: 10px;
+      border-radius: 5px;
+      font-family: monospace;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>DDL, DML e DQL no MySQL</h1>
+
+  <h2>📌 DDL (Data Definition Language) - Definição de Estruturas</h2>
+
+  <h3>CREATE TABLE</h3>
+  <p>Cria uma nova tabela no banco de dados.</p>
+  <pre>CREATE TABLE usuarios (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL
+);</pre>
+
+  <h3>ALTER TABLE</h3>
+  <p>Modifica a estrutura de uma tabela existente.</p>
+  <pre>ALTER TABLE usuarios ADD COLUMN idade INT;</pre>
+
+  <h3>DROP TABLE</h3>
+  <p>Remove uma tabela do banco de dados.</p>
+  <pre>DROP TABLE usuarios;</pre>
+
+  <h3>TRUNCATE TABLE</h3>
+  <p>Apaga todos os registros de uma tabela sem remover sua estrutura.</p>
+  <pre>TRUNCATE TABLE usuarios;</pre>
+
+  <h3>CREATE INDEX</h3>
+  <p>Cria um índice para otimizar buscas em uma coluna.</p>
+  <pre>CREATE INDEX idx_nome ON usuarios(nome);</pre>
+
+  <h3>DROP INDEX</h3>
+  <p>Remove um índice existente.</p>
+  <pre>DROP INDEX idx_nome ON usuarios;</pre>
+
+  <h3>CREATE VIEW</h3>
+  <p>Cria uma visão baseada em uma consulta.</p>
+  <pre>CREATE VIEW usuarios_ativos AS 
+SELECT id, nome FROM usuarios WHERE ativo = 1;</pre>
+
+  <h3>DROP VIEW</h3>
+  <p>Remove uma visão do banco de dados.</p>
+  <pre>DROP VIEW usuarios_ativos;</pre>
+
+  <h2>📌 DML (Data Manipulation Language) - Manipulação de Dados</h2>
+
+  <h3>INSERT INTO</h3>
+  <p>Insere novos registros em uma tabela.</p>
+  <pre>INSERT INTO usuarios (nome, email) VALUES ('João Silva', 'joao@email.com');</pre>
+
+  <h3>UPDATE</h3>
+  <p>Atualiza registros existentes.</p>
+  <pre>UPDATE usuarios SET nome = 'João Souza' WHERE id = 1;</pre>
+
+  <h3>DELETE</h3>
+  <p>Remove registros da tabela.</p>
+  <pre>DELETE FROM usuarios WHERE id = 1;</pre>
+
+  <h3>REPLACE INTO</h3>
+  <p>Insere um novo registro ou substitui um existente.</p>
+  <pre>REPLACE INTO usuarios (id, nome, email) VALUES (1, 'João Souza', 'joao@email.com');</pre>
+
+  <h3>INSERT INTO ... SELECT</h3>
+  <p>Insere dados com base em outra consulta.</p>
+  <pre>INSERT INTO usuarios_backup (id, nome, email)
+SELECT id, nome, email FROM usuarios WHERE ativo = 1;</pre>
+
+  <h2>📌 DQL (Data Query Language) - Consulta de Dados</h2>
+
+  <h3>SELECT</h3>
+  <p>Consulta registros na tabela.</p>
+  <pre>SELECT nome, email FROM usuarios WHERE ativo = 1;</pre>
+
+  <h3>SELECT DISTINCT</h3>
+  <p>Retorna valores únicos em uma consulta.</p>
+  <pre>SELECT DISTINCT email FROM usuarios;</pre>
+
+  <h3>ORDER BY</h3>
+  <p>Ordena os resultados da consulta.</p>
+  <pre>SELECT nome, email FROM usuarios ORDER BY nome ASC;</pre>
+
+  <h3>LIMIT</h3>
+  <p>Restringe o número de registros retornados.</p>
+  <pre>SELECT * FROM usuarios LIMIT 5;</pre>
+
+  <h3>GROUP BY</h3>
+  <p>Agrupa os resultados baseando-se em um critério.</p>
+  <pre>SELECT ativo, COUNT(*) FROM usuarios GROUP BY ativo;</pre>
+
+  <h3>HAVING</h3>
+  <p>Filtra grupos de resultados após um GROUP BY.</p>
+  <pre>SELECT ativo, COUNT(*) FROM usuarios GROUP BY ativo HAVING COUNT(*) > 10;</pre>
+
+  <h3>JOIN</h3>
+  <p>Realiza junções entre tabelas.</p>
+  <pre>SELECT u.nome, p.nome AS produto
+FROM usuarios u
+JOIN pedidos p ON u.id = p.usuario_id;</pre>
+
+  <h3>UNION</h3>
+  <p>Combina múltiplas consultas SELECT.</p>
+  <pre>SELECT nome FROM clientes UNION SELECT nome FROM fornecedores;</pre>
+
+</body>
+
+</html>

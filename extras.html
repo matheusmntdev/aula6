@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Restrições, Operadores e Extras no MySQL</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      line-height: 1.6;
+    }
+
+    h1,
+    h2 {
+      color: #2c3e50;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    th,
+    td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #3498db;
+      color: white;
+    }
+
+    .code {
+      background-color: #f4f4f4;
+      padding: 10px;
+      border-radius: 5px;
+      font-family: monospace;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Extras no MySQL</h1> 
+
+  <h2>1. Operadores e Extras no MySQL</h2>
+  <h3>🔹 AUTO_INCREMENT</h3>
+  <p>Define um incremento automático para colunas numéricas.</p>
+  <div class="code">
+    CREATE TABLE produtos (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL
+    );
+  </div>
+
+  <h3>🔹 UNSIGNED</h3>
+  <p>Define que um número inteiro não pode ter valores negativos.</p>
+  <div class="code">
+    CREATE TABLE estoque (
+    id INT PRIMARY KEY,
+    quantidade INT UNSIGNED NOT NULL
+    );
+  </div>
+
+  <h3>🔹 ZEROFILL</h3>
+  <p>Preenche números com zeros à esquerda.</p>
+  <div class="code">
+    CREATE TABLE pedidos (
+    id INT PRIMARY KEY ZEROFILL,
+    valor DECIMAL(10,2) NOT NULL
+    );
+  </div>
+
+  <h3>🔹 ENUM</h3>
+  <p>Define uma lista fixa de valores para uma coluna.</p>
+  <div class="code">
+    CREATE TABLE status_pedidos (
+    id INT PRIMARY KEY,
+    status ENUM('pendente', 'pago', 'cancelado') NOT NULL
+    );
+  </div>
+
+  <h3>🔹 SET</h3>
+  <p>Permite armazenar múltiplos valores de uma lista predefinida.</p>
+  <div class="code">
+    CREATE TABLE preferencias (
+    id INT PRIMARY KEY,
+    opcoes SET('email', 'sms', 'notificacao') NOT NULL
+    );
+  </div>
+
+  <h2>6. Resumo das Restrições e Extras</h2>
+  <table>
+    <tr>
+      <th>Elemento</th>
+      <th>Descrição</th>
+    </tr> 
+    <tr>
+      <td>AUTO_INCREMENT</td>
+      <td>Incremento automático para chaves primárias.</td>
+    </tr>
+    <tr>
+      <td>UNSIGNED</td>
+      <td>Impede valores negativos em inteiros.</td>
+    </tr>
+    <tr>
+      <td>ZEROFILL</td>
+      <td>Preenche números com zeros à esquerda.</td>
+    </tr>
+    <tr>
+      <td>ENUM</td>
+      <td>Define uma lista fixa de valores.</td>
+    </tr>
+    <tr>
+      <td>SET</td>
+      <td>Permite armazenar múltiplos valores de uma lista.</td>
+    </tr>
+  </table>
+</body>
+
+</html>

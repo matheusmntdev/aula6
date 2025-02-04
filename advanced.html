@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MySQL - Restrições, Operadores e Recursos Avançados</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      line-height: 1.6;
+    }
+
+    h1,
+    h2 {
+      color: #2c3e50;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    th,
+    td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #3498db;
+      color: white;
+    }
+
+    .code {
+      background-color: #f4f4f4;
+      padding: 10px;
+      border-radius: 5px;
+      font-family: monospace;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>MySQL - Restrições, Operadores e Recursos Avançados</h1>
+
+  <h2>1. Índices</h2>
+  <p>Os índices melhoram o desempenho das buscas.</p>
+  <div class="code">
+    CREATE INDEX idx_nome ON clientes(nome);
+  </div>
+
+  <h2>2. Particionamento de Tabelas</h2>
+  <p>Permite dividir dados grandes para melhor desempenho.</p>
+  <div class="code">
+    CREATE TABLE pedidos (
+    id INT NOT NULL,
+    data_pedido DATE NOT NULL
+    ) PARTITION BY RANGE (YEAR(data_pedido)) (
+    PARTITION p1 VALUES LESS THAN (2020),
+    PARTITION p2 VALUES LESS THAN (2025)
+    );
+  </div>
+
+  <h2>3. Storage Engines</h2>
+  <p>Definem como os dados são armazenados.</p>
+  <div class="code">
+    CREATE TABLE logs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    mensagem TEXT
+    ) ENGINE=ARCHIVE;
+  </div>
+
+  <h2>4. Views (Visões)</h2>
+  <p>Consultas pré-definidas tratadas como tabelas.</p>
+  <div class="code">
+    CREATE VIEW clientes_ativos AS
+    SELECT id, nome FROM clientes WHERE status = 'ativo';
+  </div>
+
+  <h2>5. Procedimentos Armazenados</h2>
+  <p>Permitem armazenar lógica no banco.</p>
+  <div class="code">
+    CREATE PROCEDURE obter_clientes()
+    BEGIN
+    SELECT * FROM clientes;
+    END;
+  </div>
+
+  <h2>6. Triggers (Gatilhos)</h2>
+  <p>Executam ações automáticas ao modificar dados.</p>
+  <div class="code">
+    CREATE TRIGGER atualiza_estoque AFTER INSERT ON pedidos
+    FOR EACH ROW
+    UPDATE estoque SET quantidade = quantidade - 1 WHERE produto_id = NEW.produto_id;
+  </div>
+
+  <h2>7. Eventos (Tarefas Agendadas)</h2>
+  <p>Executam ações em horários definidos.</p>
+  <div class="code">
+    CREATE EVENT limpar_logs
+    ON SCHEDULE EVERY 1 DAY
+    DO DELETE FROM logs WHERE data < NOW() - INTERVAL 30 DAY; </div>
+
+      <h2>8. JSON no MySQL</h2>
+      <p>Suporte nativo a JSON para armazenar dados estruturados.</p>
+      <div class="code">
+        CREATE TABLE produtos (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        dados JSON
+        );
+      </div>
+</body>
+
+</html>
